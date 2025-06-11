@@ -1,57 +1,69 @@
-# After that, you can edit ~/.aerospace.toml to your liking
+# AeroSpace configuration file
+# For more information on configuration options, visit:
+# https://nikitabobko.github.io/AeroSpace/guide.html
+
+# Command to execute after AeroSpace startup.
+# Example: Launching a status bar like Sketchybar.
 # after-startup-command = ['exec-and-forget sketchybar']
 
-# Notify Sketchybar about workspace change
+# Command to execute when the focused workspace changes.
+# This is useful for updating status bars or other integrations.
+# Example: Notify Sketchybar and update window borders.
 exec-on-workspace-change = ['/bin/bash', '-c',
   # 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
   'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
 ]
 
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
+# Commands to run after login to macOS user session.
+# Requires 'start-at-login' to be true.
+# See available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 
-# You can use it to add commands that run after AeroSpace startup.
-# 'after-startup-command' is run after 'after-login-command'
-# Available commands : https://nikitabobko.github.io/AeroSpace/commands
+# Commands to run after AeroSpace startup.
+# These run after 'after-login-command'.
+# See available commands: https://nikitabobko.github.io/AeroSpace/commands
 # after-startup-command = []
 
-# Start AeroSpace at login
+# Automatically start AeroSpace at login.
 start-at-login = false
 
-# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
+# Normalization settings. These help maintain a consistent window layout.
+# See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true # Flattens nested containers.
+enable-normalization-opposite-orientation-for-nested-containers = true # Sets opposite orientation for nested containers.
 
+# Layout settings.
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
-# The 'accordion-padding' specifies the size of accordion padding
-# You can set 0 to disable the padding feature
+# 'accordion-padding' specifies the padding for accordion layout.
+# Set to 0 to disable padding.
 accordion-padding = 300
 
-# Possible values: tiles|accordion
+# Default layout for new workspaces.
+# Possible values: 'tiles', 'accordion'.
 default-root-container-layout = 'tiles'
 
-# Possible values: horizontal|vertical|auto
-# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
-#               tall monitor (anything higher than wide) gets vertical orientation
+# Default orientation for new containers.
+# Possible values: 'horizontal', 'vertical', 'auto'.
+# 'auto' sets orientation based on monitor aspect ratio.
 default-root-container-orientation = 'auto'
 
-# Mouse follows focus when focused monitor changes
-# Drop it from your config, if you don't like this behavior
-# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
-# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
-# Fallback value (if you omit the key): on-focused-monitor-changed = []
+# Behavior of the mouse cursor when changing focused monitor.
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+# See commands: https://nikitabobko.github.io/AeroSpace/commands#move-mouse
+# This command moves the mouse to the center of the focused monitor.
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
-# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
-# Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
+# Automatically unhide applications that were hidden using macOS's hide feature (Cmd+H).
+# Useful if you prefer AeroSpace's workspace management over macOS's hiding.
+# See: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
+# Rules for specific applications when they are detected.
+# This section defines how certain applications should behave.
+# Example: Make Telegram, Transmission, Finder, Discord, and Outline windows floating by default.
 [[on-window-detected]]
-if.app-name-regex-substring = 'telegram'
-run = 'layout floating'
+if.app-name-regex-substring = 'telegram' # Matches if 'telegram' is part of the app name.
+run = 'layout floating' # Makes the window floating.
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'transmission'
@@ -62,60 +74,46 @@ if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id ='com.hnc.Discord'
+if.app-id ='com.hnc.Discord' # Matches by application bundle ID.
 run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'outline'
 run = 'layout floating'
 
-# Possible values: (qwerty|dvorak|colemak)
-# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
+# Key mapping preset.
+# Possible values: 'qwerty', 'dvorak', 'colemak'.
+# See: https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
-    preset = 'qwerty'
+    preset = 'qwerty' # Sets the keyboard layout preset.
 
-# Gaps between windows (inner-*) and between monitor edges (outer-*).
-# Possible values:
-# - Constant:     gaps.outer.top = 8
-# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
-#                 In this example, 24 is a default value when there is no match.
-#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
-#                 See:
-#                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+# Gaps configuration.
+# Defines spacing between windows (inner) and between windows and monitor edges (outer).
+# Values can be constant or per-monitor.
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors for monitor patterns.
 [gaps]
-    inner.horizontal = 15
-    inner.vertical =   15
-    outer.left =       10
-    outer.bottom =     10
+    inner.horizontal = 15 # Horizontal gap between windows.
+    inner.vertical =   15 # Vertical gap between windows.
+    outer.left =       10 # Gap on the left edge of the monitor.
+    outer.bottom =     10 # Gap on the bottom edge of the monitor.
+    # Gap on the top edge. Main monitor has 10, DELL UP3216Q has 30, others default to 30.
     outer.top =        [{ monitor.main = 10 }, {monitor."DELL.UP3216Q" = 30}, 30]
-    outer.right =      10
+    outer.right =      10 # Gap on the right edge of the monitor.
 
-# 'main' binding mode declaration
+# Main binding mode. This is the default mode.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# 'main' binding mode must be always presented
-# Fallback value (if you omit the key): mode.main.binding = {}
+# Keybindings defined here are active in the 'main' mode.
 [mode.main.binding]
 
-    # All possible keys:
-    # - Letters.        a, b, c, ..., z
-    # - Numbers.        0, 1, 2, ..., 9
-    # - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
-    # - F-keys.         f1, f2, ..., f20
-    # - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon,
-    #                   backtick, leftSquareBracket, rightSquareBracket, space, enter, esc,
-    #                   backspace, tab, pageUp, pageDown, home, end, forwardDelete,
-    #                   sectionSign (ISO keyboards only, european keyboards only)
-    # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
-    #                   keypadMinus, keypadMultiply, keypadPlus
-    # - Arrows.         left, down, up, right
+    # Keybinding syntax:
+    # modifier1-modifier2-key = 'command'
+    # Example: alt-enter = 'exec-and-forget open -a Terminal'
 
-    # All possible modifiers: cmd, alt, ctrl, shift
+    # For a list of all possible keys, modifiers, and commands, see:
+    # Keys & Modifiers: Directly in the comments below (taken from default config)
+    # Commands: https://nikitabobko.github.io/AeroSpace/commands
 
-    # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
-
-    # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-    # You can uncomment the following lines to open up terminal with alt + enter shortcut
-    # (like in i3)
+    # Example: Open terminal with alt + enter (similar to i3).
     # alt-enter = '''exec-and-forget osascript -e '
     # tell application "Terminal"
     #     do script
@@ -123,81 +121,102 @@ run = 'layout floating'
     # end tell'
     # '''
 
+    # Layout commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
-    alt-ctrl-f = 'layout floating tiling'
-    alt-ctrl-shift-f = 'fullscreen'
-    alt-shift-left = 'join-with left'
-    alt-shift-down = 'join-with down'
-    alt-shift-up = 'join-with up'
-    alt-shift-right = 'join-with right'
+    alt-slash = 'layout tiles horizontal vertical' # Cycle through tile layouts.
+    alt-comma = 'layout accordion horizontal vertical' # Cycle through accordion layouts.
+    alt-ctrl-f = 'layout floating tiling' # Toggle between floating and tiling for the focused window.
+    alt-ctrl-shift-f = 'fullscreen' # Toggle fullscreen for the focused window.
 
+    # Join commands (merge windows into the same container)
+    # See: https://nikitabobko.github.io/AeroSpace/commands#join-with
+    alt-shift-left = 'join-with left' # Join with the window to the left.
+    alt-shift-down = 'join-with down' # Join with the window below.
+    alt-shift-up = 'join-with up' # Join with the window above.
+    alt-shift-right = 'join-with right' # Join with the window to the right.
+
+    # Focus commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+    alt-h = 'focus left' # Focus window to the left.
+    alt-j = 'focus down' # Focus window below.
+    alt-k = 'focus up' # Focus window above.
+    alt-l = 'focus right' # Focus window to the right.
 
+    # Move commands (move focused window)
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    alt-shift-h = 'move left'
-    alt-shift-j = 'move down'
-    alt-shift-k = 'move up'
-    alt-shift-l = 'move right'
+    alt-shift-h = 'move left' # Move window to the left.
+    alt-shift-j = 'move down' # Move window down.
+    alt-shift-k = 'move up' # Move window up.
+    alt-shift-l = 'move right' # Move window to the right.
 
+    # Resize commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    alt-minus = 'resize smart -50'
-    alt-equal = 'resize smart +50'
+    alt-minus = 'resize smart -50' # Decrease window size.
+    alt-equal = 'resize smart +50' # Increase window size.
 
+    # Workspace commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
+    alt-1 = 'workspace 1' # Switch to workspace 1.
+    alt-2 = 'workspace 2' # Switch to workspace 2.
+    alt-3 = 'workspace 3' # Switch to workspace 3.
+    alt-4 = 'workspace 4' # Switch to workspace 4.
 
+    # Move node (window) to workspace commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-    alt-shift-1 = 'move-node-to-workspace 1'
-    alt-shift-2 = 'move-node-to-workspace 2'
-    alt-shift-3 = 'move-node-to-workspace 3'
-    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-1 = 'move-node-to-workspace 1' # Move focused window to workspace 1.
+    alt-shift-2 = 'move-node-to-workspace 2' # Move focused window to workspace 2.
+    alt-shift-3 = 'move-node-to-workspace 3' # Move focused window to workspace 3.
+    alt-shift-4 = 'move-node-to-workspace 4' # Move focused window to workspace 4.
+
+    # Workspace navigation
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    alt-tab = 'workspace-back-and-forth' # Switch to the previously focused workspace.
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next' # Move current workspace to the next monitor.
 
+    # Mode switching commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    alt-shift-semicolon = 'mode service'
-    alt-shift-enter = 'mode apps'
+    alt-shift-semicolon = 'mode service' # Switch to 'service' mode.
+    alt-shift-enter = 'mode apps' # Switch to 'apps' mode (if defined).
 
-    alt-t = 'exec-and-forget open -a /Applications/Telegram.app'
-    alt-a = 'exec-and-forget open -a /Applications/Arc.app'
-    alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
-    alt-g = 'exec-and-forget open -a /Applications/Ghostty.app'
-    alt-b = 'exec-and-forget open -a /Applications/Google Chrome.app'
+    # Application launch shortcuts
+    # 'exec-and-forget' runs the command in the background without waiting for it to complete.
+    alt-t = 'exec-and-forget open -a /Applications/Telegram.app' # Open Telegram.
+    alt-a = 'exec-and-forget open -a /Applications/Arc.app' # Open Arc browser.
+    alt-o = 'exec-and-forget open -a /Applications/Obsidian.app' # Open Obsidian.
+    alt-g = 'exec-and-forget open -a /Applications/Ghostty.app' # Open Ghostty terminal.
+    alt-b = 'exec-and-forget open -a /Applications/Google Chrome.app' # Open Google Chrome.
 
-
+# Workspace to monitor assignment.
+# Forces specific workspaces to always open on designated monitors.
+# ['secondary', 'main'] means workspace 3 will try to open on 'secondary' monitor first,
+# and if not available, it will open on 'main'.
 [workspace-to-monitor-force-assignment]
-    1 = 'main'
-    2 = 'main'
-    3 = ['secondary', 'main']
-    4 = ['secondary', 'main']
+    1 = 'main' # Workspace 1 on main monitor.
+    2 = 'main' # Workspace 2 on main monitor.
+    3 = ['secondary', 'main'] # Workspace 3 on secondary or main.
+    4 = ['secondary', 'main'] # Workspace 4 on secondary or main.
 
-# 'service' binding mode declaration.
+# 'service' binding mode.
+# This mode can be used for system-level commands or less frequently used actions.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-    backspace = ['close-all-windows-but-current', 'mode main']
+    # Exiting service mode and other commands
+    esc = ['reload-config', 'mode main'] # Reload config and return to main mode.
+    r = ['flatten-workspace-tree', 'mode main'] # Reset layout and return to main mode.
+    f = ['layout floating tiling', 'mode main'] # Toggle floating/tiling and return to main mode.
+    backspace = ['close-all-windows-but-current', 'mode main'] # Close all windows except current and return to main mode.
 
-    # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+    # Sticky windows are not yet supported: https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
 
+    # Join commands (similar to main mode, returning to main mode afterwards)
     alt-shift-h = ['join-with left', 'mode main']
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
-    down = 'volume down'
-    up = 'volume up'
-    shift-down = ['volume set 0', 'mode main']
+    # Volume control commands
+    down = 'volume down' # Decrease system volume.
+    up = 'volume up' # Increase system volume.
+    shift-down = ['volume set 0', 'mode main'] # Mute volume and return to main mode.

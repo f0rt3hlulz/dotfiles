@@ -1,2 +1,10 @@
+# This file specifies intentionally untracked files that Git should ignore.
+# Lines starting with '#' are comments.
+
+# Ignore '.env' files.
+# '.env' files typically contain environment-specific variables, such as
+# API keys, database credentials, or other secrets that should not be
+# committed to a version control system.
+# Each developer or deployment environment might have its own '.env' file.
 .env
 

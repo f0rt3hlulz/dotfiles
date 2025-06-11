@@ -1,3 +1,34 @@
+# This is a .stowrc file, used by GNU Stow (https://www.gnu.org/software/stow/).
+# Stow is a symlink farm manager which takes distinct packages of software
+# and installs them in a single directory tree. It's commonly used for managing dotfiles.
+# This file allows you to set default options for Stow commands run in this directory.
+
+# --target=<directory>
+# Specifies the target directory where the symlinks will be created.
+# In this case, Stow will create symlinks inside the `~/.config` directory.
+# For example, if you have a package `nvim` in your Stow directory (e.g., `dotfiles/nvim`),
+# and run `stow nvim`, Stow will try to symlink `dotfiles/nvim/.config/nvim` to `~/.config/nvim`
+# if the target is `~/`. However, with `--target=~/.config`, it implies that files/directories
+# directly within your `nvim` package directory (e.g., `dotfiles/nvim/*`) will be symlinked
+# into `~/.config/`. So, `dotfiles/nvim/init.lua` would be symlinked to `~/.config/nvim/init.lua`
+# if your package structure is `nvim/nvim/init.lua` or if you `cd nvim` and then `stow nvim`
+# with the target being `~/.config`.
+# More typically, if your stow package is `nvim` (e.g. `dotfiles/nvim/init.lua`),
+# `stow nvim --target=$HOME` would link `dotfiles/nvim/init.lua` to `$HOME/.config/nvim/init.lua`
+# *if* `init.lua` was inside a `.config/nvim` subdirectory within your `nvim` package.
+# With `--target=~/.config`, if you have `dotfiles/nvim/foo.conf`, `stow nvim`
+# would attempt to link it to `~/.config/nvim/foo.conf`. The exact behavior depends on the
+# directory structure within your "stow package" (e.g., the `nvim` folder in your dotfiles repo).
+# This specific target suggests that packages are structured such that their contents
+# should go directly into `~/.config/<package_name>`.
 --target=~/.config
+
+# --ignore=<regex>
+# Specifies a Perl regular expression for files/directories that Stow should ignore
+# during its operations (stowing and unstowing).
+# This line ignores the .stowrc file itself, preventing Stow from trying to symlink it.
 --ignore=.stowrc
+
+# This line ignores '.DS_Store' files, which are metadata files created by macOS Finder.
+# These are generally not needed in version control or in symlinked configurations.
 --ignore=DS_Store

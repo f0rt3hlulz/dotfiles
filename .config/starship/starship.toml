@@ -1,42 +1,102 @@
+# Starship Configuration File
+# For a full list of options, see: https://starship.rs/config/
+
+# Determines whether a new line is added before the prompt.
+# `false` means the prompt will start on the same line as the previous command's output.
 add_newline = false
-# A minimal left prompt
+
+# Defines the main format of the prompt, specifically the left-hand side.
+# Variables like `$directory` and `$character` are placeholders for Starship modules.
+# This configuration creates a minimal left prompt showing only the current directory and the prompt character.
 format = """$directory$character"""
+
+# Specifies the color palette to be used for styling different prompt elements.
+# "catppuccin_mocha" refers to a predefined palette defined later in this file.
 palette = "catppuccin_mocha"
-# move the rest of the prompt to the right
+
+# Defines the format of the right-hand side of the prompt.
+# `$all` is a special variable that includes all modules not explicitly placed in the `format` (left prompt).
+# This effectively moves modules like git status, package versions, etc., to the right.
 right_format = """$all"""
+
+# Sets a timeout (in milliseconds) for commands that Starship runs to gather information (e.g., git status).
+# If a command takes longer than this, Starship will skip its output for that module.
 command_timeout = 1000
 
+# Configuration for the 'character' module, which displays the prompt symbol.
 [character]
+# Symbol to display when in vi command mode (if your shell supports it). Commented out here.
 # vicmd_symbol = "[N] >>>"
+# Symbol to display for a successful previous command. Styled bold green.
+# The `➜` is a common symbol indicating readiness for a new command.
 success_symbol = '[➜](bold green)'
 
+# Configuration for the 'directory' module.
+# `substitutions` allow replacing parts of the displayed path with custom aliases.
 [directory.substitutions]
+# Replaces "~/tests/starship-custom" with "work-project" in the prompt.
 '~/tests/starship-custom' = 'work-project'
 
+# Configuration for the 'git_branch' module.
+# Displays information about the current Git branch.
 [git_branch]
+# Format string for the git branch display.
+# `$symbol` is the git branch icon (usually ).
+# `$branch` is the current branch name.
+# `:$remote_branch` optionally shows the remote tracking branch if it exists.
+# `($style)` applies the default style for this module.
 format =  '[$symbol$branch(:$remote_branch)]($style)'
 
+# Configuration for the 'aws' module.
+# Displays information about the current AWS profile and region.
 [aws]
+# Format string for AWS information.
+# `$symbol` is the AWS icon.
+# `(profile: "$profile")` shows the current AWS profile.
+# `(\(region: $region\))` shows the current AWS region.
 format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
+# `disabled = false` ensures the module is active.
 disabled = false
+# Styles the AWS module text to be bold blue.
 style = 'bold blue'
+# Sets a custom symbol (Nerd Font icon for AWS).
 symbol = " "
 
+# Configuration for the 'golang' module.
+# Displays the Go version if in a Go project.
 [golang]
+# Format string: shows a Go icon () styled bold cyan.
 format = '[ ](bold cyan)'
 
+# Configuration for the 'kubernetes' module.
+# Displays information about the current Kubernetes context and namespace.
 [kubernetes]
+# Default symbol for Kubernetes.
 symbol = '☸ '
+# This module is currently disabled. To enable, set to `false`.
 disabled = true
+# Files that trigger the detection of a Kubernetes environment (e.g., if a Dockerfile is present).
 detect_files = ['Dockerfile']
+# Format string for Kubernetes information.
+# `$symbol` is the Kubernetes icon.
+# `$context` is the current cluster context.
+# `(\($namespace\))` shows the current namespace within that context.
 format = '[$symbol$context( \($namespace\))]($style) '
+# Defines custom styling and aliases for specific Kubernetes contexts.
 contexts = [
   { context_pattern = "arn:aws:eks:us-west-2:577926974532:cluster/zd-pvc-omer", style = "green", context_alias = "omerxx", symbol = " " },
 ]
 
+# Configuration for the 'docker_context' module.
+# Displays the current Docker context.
 [docker_context]
+# This module is currently disabled. To enable, set to `false`.
 disabled = true
 
+# Defines a custom color palette named "catppuccin_mocha".
+# This palette provides a set of named colors that can be referenced in the `style`
+# attributes of different modules (e.g., `bold green` uses the `green` color from this palette).
+# These are standard Catppuccin Mocha theme colors.
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
