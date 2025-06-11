@@ -1,9 +1,33 @@
 # This is the configuration file for Ghostty.
+# For a full list of options, refer to the official Ghostty documentation.
+
+# Specifies the color scheme for the terminal.
+# Example: "catppuccin-mocha", "gruvbox-dark", "solarized-light", etc.
+# A list of available themes can usually be found in Ghostty's documentation or community resources.
 theme = catppuccin-mocha
+
+# Sets the default font size for the terminal text.
 font-size = 19
+
+# Enables a blur effect for the terminal window background (if supported by the compositor).
+# The value determines the intensity of the blur. Higher values mean more blur.
+# Set to 0 to disable.
 background-blur-radius = 20
+
+# If true, the mouse cursor will be hidden when typing in the terminal.
 mouse-hide-while-typing = true
+
+# If true, the terminal window will have the standard operating system window decorations (title bar, close/minimize/maximize buttons).
+# Set to false for a more minimalist appearance, often used in tiling window manager setups.
 window-decoration = true
+
+# On macOS, this setting determines how the Option (⌥) key is treated.
+# If true, the Option key will behave as an Alt key, which is common for sending meta-sequences in terminal applications.
+# If false, it will retain its default macOS behavior (e.g., for typing special characters).
 macos-option-as-alt = true
+
+# Sets the opacity of the terminal window background.
+# Values range from 0.0 (fully transparent) to 1.0 (fully opaque).
+# This allows underlying windows or desktop wallpaper to be partially visible.
 background-opacity = 0.8
 
