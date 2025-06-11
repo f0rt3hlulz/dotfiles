@@ -1,0 +1,9 @@
+# This is the configuration file for Ghostty.
+theme = catppuccin-mocha
+font-size = 19
+background-blur-radius = 20
+mouse-hide-while-typing = true
+window-decoration = true
+macos-option-as-alt = true
+background-opacity = 0.8
+
