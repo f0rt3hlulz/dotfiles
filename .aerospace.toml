@@ -78,7 +78,7 @@ if.app-id ='com.hnc.Discord' # Matches by application bundle ID.
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'outline'
+if.app-name-regex-substring = 'Outline'
 run = 'layout floating'
 
 # Key mapping preset.
@@ -97,7 +97,7 @@ run = 'layout floating'
     outer.left =       10 # Gap on the left edge of the monitor.
     outer.bottom =     10 # Gap on the bottom edge of the monitor.
     # Gap on the top edge. Main monitor has 10, DELL UP3216Q has 30, others default to 30.
-    outer.top =        [{ monitor.main = 10 }, {monitor."DELL.UP3216Q" = 30}, 30]
+    outer.top =        [{ monitor."MacBook" = 10 }, { monitor."DELL.UP3216Q" = 30 }, { monitor."Mi monitor" = 30}, 30]
     outer.right =      10 # Gap on the right edge of the monitor.
 
 # Main binding mode. This is the default mode.

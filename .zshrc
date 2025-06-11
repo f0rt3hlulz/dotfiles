@@ -142,3 +142,17 @@ alias la=tree
 #        `bat` is a `cat` clone with syntax highlighting and Git integration.
 alias cat=bat
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Persist and enlarge Zsh’s own command history
+# (this has no effect on tmux’s scrollback buffer)
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Immediately append each typed command to the history file,
+# and share it across all running Zsh sessions.
+setopt inc_append_history     # append commands as they are entered
+setopt share_history          # share history across sessions
+setopt hist_ignore_dups       # ignore duplicate commands
+setopt hist_reduce_blanks     # remove superfluous blanks from history entries
+
