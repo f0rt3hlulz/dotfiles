@@ -97,7 +97,7 @@ run = 'layout floating'
     outer.left =       10 # Gap on the left edge of the monitor.
     outer.bottom =     10 # Gap on the bottom edge of the monitor.
     # Gap on the top edge. Main monitor has 10, DELL UP3216Q has 30, others default to 30.
-    outer.top =        [{ monitor."MacBook" = 10 }, { monitor."DELL.UP3216Q" = 30 }, { monitor."Mi monitor" = 30}, 30]
+    outer.top =        [{ monitor.main = 10 }, { monitor."DELL.UP3216Q" = 15 }, { monitor."Mi monitor" = 30}, 30]
     outer.right =      10 # Gap on the right edge of the monitor.
 
 # Main binding mode. This is the default mode.
@@ -182,10 +182,11 @@ run = 'layout floating'
     # Application launch shortcuts
     # 'exec-and-forget' runs the command in the background without waiting for it to complete.
     alt-t = 'exec-and-forget open -a /Applications/Telegram.app' # Open Telegram.
-    alt-a = 'exec-and-forget open -a /Applications/Arc.app' # Open Arc browser.
+# alt-a = 'exec-and-forget open -a /Applications/Arc.app' # Open Arc browser.
     alt-o = 'exec-and-forget open -a /Applications/Obsidian.app' # Open Obsidian.
     alt-g = 'exec-and-forget open -a /Applications/Ghostty.app' # Open Ghostty terminal.
     alt-b = 'exec-and-forget open -a /Applications/Google Chrome.app' # Open Google Chrome.
+    alt-d = 'exec-and-forget open -a /Applications/Dia.app'
 
 # Workspace to monitor assignment.
 # Forces specific workspaces to always open on designated monitors.

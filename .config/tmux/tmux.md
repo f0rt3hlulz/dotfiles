@@ -92,6 +92,7 @@ Here's a list of the installed plugins and their functions:
     *   Navigate with Vi keys (`h,j,k,l,w,b,e,gg,G`).
     *   Start selection: `v` (as per `tmux.reset.conf`).
     *   Yank selection: `y` (if `tmux-yank` is active, this often copies to system clipboard).
+    *   Paste buffer: `Prefix + ]`.
 *   **Session Management**:
     *   `tmux ls`: List current sessions.
     *   `tmux attach -t <session_name>`: Attach to a session.

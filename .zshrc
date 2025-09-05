@@ -14,6 +14,18 @@ export ZSH="$HOME/.oh-my-zsh"
 # This is a common way to load sensitive or machine-specific variables without
 # hardcoding them into version-controlled dotfiles.
 [ -f ~/.env ] && export $(grep -v '^#' ~/.env | xargs)
+# This command is for codex, to continue previous session.
+codex() {
+      if [[ $1 == continue ]]; then
+        shift
+        # reopen most‑recent session, passing along any extra args if you like
+        command codex -v "$(command codex --history | head -n1 | awk '{print
+$1}')" "$@"
+      else
+        command codex "$@"
+      fi
+}
+
 
 # --- Zsh Options and Completions ---
 # `setopt prompt_subst`: Enables parameter expansion, command substitution,
@@ -156,3 +168,8 @@ setopt share_history          # share history across sessions
 setopt hist_ignore_dups       # ignore duplicate commands
 setopt hist_reduce_blanks     # remove superfluous blanks from history entries
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/ftl/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
