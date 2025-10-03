@@ -50,6 +50,11 @@ fpath=(/Users/ftl/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 
+# Direnv integration keeps project-specific env vars in sync across shells and tmux
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
 # --- Kubectl Completion ---
 # Sources the Zsh completion script for kubectl (Kubernetes command-line tool).
 # This provides tab completion for kubectl commands and arguments.

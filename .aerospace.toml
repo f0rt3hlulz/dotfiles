@@ -81,6 +81,18 @@ run = 'layout floating'
 if.app-name-regex-substring = 'Outline'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'layout tiling'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'layout floating'
+
 # Key mapping preset.
 # Possible values: 'qwerty', 'dvorak', 'colemak'.
 # See: https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -160,6 +172,7 @@ run = 'layout floating'
     alt-2 = 'workspace 2' # Switch to workspace 2.
     alt-3 = 'workspace 3' # Switch to workspace 3.
     alt-4 = 'workspace 4' # Switch to workspace 4.
+    alt-s = 'workspace scratch' # Jump to scratch workspace on demand.
 
     # Move node (window) to workspace commands
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -167,6 +180,7 @@ run = 'layout floating'
     alt-shift-2 = 'move-node-to-workspace 2' # Move focused window to workspace 2.
     alt-shift-3 = 'move-node-to-workspace 3' # Move focused window to workspace 3.
     alt-shift-4 = 'move-node-to-workspace 4' # Move focused window to workspace 4.
+    alt-shift-s = 'move-node-to-workspace scratch' # Send window to scratch workspace.
 
     # Workspace navigation
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth

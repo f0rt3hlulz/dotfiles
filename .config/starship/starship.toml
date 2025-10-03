@@ -108,6 +108,15 @@ full_symbol = '🔋 '
 charging_symbol = '⚡ '
 discharging_symbol = '🔌 '
 
+[custom.tmux_target]
+command = "tmux display-message -p '#S:#I.#P'"
+when = "test -n \"$TMUX\""
+format = '[ $output]($style) '
+style = 'bold blue'
+
+[direnv]
+disabled = false
+
 # Defines a custom color palette named "catppuccin_mocha".
 # This palette provides a set of named colors that can be referenced in the `style`
 # attributes of different modules (e.g., `bold green` uses the `green` color from this palette).

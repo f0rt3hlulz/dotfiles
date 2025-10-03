@@ -12,6 +12,7 @@ font-size = 19
 # Use a Nerd Font so tmux powerline glyphs render correctly.
 font-family = "Hack Nerd Font Mono"
 
+
 # Enables a blur effect for the terminal window background (if supported by the compositor).
 # The value determines the intensity of the blur. Higher values mean more blur.
 # Set to 0 to disable.
@@ -25,7 +26,7 @@ mouse-hide-while-typing = true
 window-decoration = true
 
 # Enable shell integration so macOS sees the active directory/command (helps hand-off shortcuts)
-shell-integration = true
+shell-integration = detect
 
 # On macOS, this setting determines how the Option (⌥) key is treated.
 # If true, the Option key will behave as an Alt key, which is common for sending meta-sequences in terminal applications.
