@@ -41,6 +41,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # This allows Zsh to use completion scripts written for Bash.
 autoload bashcompinit && bashcompinit
 
+# Docker Desktop completions need to be on the fpath before we initialize compinit.
+fpath=(/Users/ftl/.docker/completions $fpath)
+
 # `autoload -Uz compinit` and `compinit`: Loads and initializes Zsh's own powerful completion system.
 # `-U` allows loading insecure files (common for user-installed completions).
 # `-z` checks if compinit has already been initialized.
@@ -168,8 +171,13 @@ setopt share_history          # share history across sessions
 setopt hist_ignore_dups       # ignore duplicate commands
 setopt hist_reduce_blanks     # remove superfluous blanks from history entries
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/ftl/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ftl/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ftl/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ftl/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ftl/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="$HOME/.local/bin:$PATH"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH=$PATH:$HOME/go/bin

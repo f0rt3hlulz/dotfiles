@@ -4,10 +4,13 @@
 # Specifies the color scheme for the terminal.
 # Example: "catppuccin-mocha", "gruvbox-dark", "solarized-light", etc.
 # A list of available themes can usually be found in Ghostty's documentation or community resources.
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 # Sets the default font size for the terminal text.
 font-size = 19
+
+# Use a Nerd Font so tmux powerline glyphs render correctly.
+font-family = "Hack Nerd Font Mono"
 
 # Enables a blur effect for the terminal window background (if supported by the compositor).
 # The value determines the intensity of the blur. Higher values mean more blur.
@@ -21,6 +24,9 @@ mouse-hide-while-typing = true
 # Set to false for a more minimalist appearance, often used in tiling window manager setups.
 window-decoration = true
 
+# Enable shell integration so macOS sees the active directory/command (helps hand-off shortcuts)
+shell-integration = true
+
 # On macOS, this setting determines how the Option (⌥) key is treated.
 # If true, the Option key will behave as an Alt key, which is common for sending meta-sequences in terminal applications.
 # If false, it will retain its default macOS behavior (e.g., for typing special characters).
@@ -30,4 +36,3 @@ macos-option-as-alt = true
 # Values range from 0.0 (fully transparent) to 1.0 (fully opaque).
 # This allows underlying windows or desktop wallpaper to be partially visible.
 background-opacity = 0.8
-

@@ -93,6 +93,21 @@ contexts = [
 # This module is currently disabled. To enable, set to `false`.
 disabled = true
 
+# Disable Google Cloud account from appearing in the prompt.
+[gcloud]
+disabled = true
+
+[cmd_duration]
+min_time = 2000
+show_milliseconds = true
+format = '[⏱ $duration]($style) '
+
+[battery]
+disabled = false
+full_symbol = '🔋 '
+charging_symbol = '⚡ '
+discharging_symbol = '🔌 '
+
 # Defines a custom color palette named "catppuccin_mocha".
 # This palette provides a set of named colors that can be referenced in the `style`
 # attributes of different modules (e.g., `bold green` uses the `green` color from this palette).
